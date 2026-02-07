@@ -7,6 +7,24 @@ const cohere = new CohereClient({
     token: process.env.API_KEY
 })
 
+app.post('/chat', async(req,res)=>{
+    try {
+        const {message} = req.body;
+        const response = await cohere.chat({
+            model: 'command-a-03-2025',
+            messages:message
+
+        })
+        return res.json(
+            {
+                reply: response.message.content[0].text,
+                messages: [...message, response.message]
+            }
+        )
+    } catch (error) {
+        
+    }
+})
 
 
 app.get('/',(req,res)=>{

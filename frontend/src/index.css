@@ -5,3 +5,138 @@
   margin: 0;
 }
 
+/* 
+Changes Explained:
+1. Outer Container (Line 53)
+Before:
+javascriptreactclassName='min-h-screen bg-white flex flex-col max-h-[70%] mx-auto ax-w-[70%] md:max-w-[70%] max-w-full mx-auto'
+Problems:
+
+min-h-screen = minimum height, allows growing taller (causes overflow)
+max-h-[70%] = typo/mistake, doesn't make sense here
+ax-w-[70%] = TYPO! Should be max-w
+Duplicate mx-auto twice
+Mix of conflicting width classes
+
+After:
+javascriptreactclassName='h-screen bg-white flex flex-col w-full md:max-w-[70%] mx-auto'
+Why:
+
+h-screen = exact screen height (100vh), no overflow
+w-full = full width on mobile
+md:max-w-[70%] = 70% width only on desktop (≥768px)
+Single mx-auto for centering
+
+
+2. Header (Line 56)
+Before:
+javascriptreact<div className='border-b border-black p-4'>
+After:
+javascriptreact<div className='border-b border-black p-4 flex-shrink-0'>
+Why:
+
+flex-shrink-0 = prevents header from shrinking when content overflows
+Keeps header at fixed height
+Ensures it always stays visible at top
+
+
+3. Messages Container (Line 60)
+Before:
+javascriptreact<div className='flex-1 overflow-y-auto p-4 max-w-3xl w-full mx-auto'>
+After:
+javascriptreact<div className='flex-1 overflow-y-auto p-4 w-full md:max-w-[56%] mx-auto'>
+Why:
+
+flex-1 = takes all remaining space between header and footer
+overflow-y-auto = enables scrolling when messages overflow
+Changed max-w-3xl (48rem) → md:max-w-[56%] for consistency (70% × 80% = 56%)
+w-full on mobile, md:max-w-[56%] on desktop
+
+
+4. Message Text (Line 79)
+Before:
+javascriptreact<p className='text-gray-900 leading-relaxed whitespace-pre-wrap h-5'>
+After:
+javascriptreact<p className='text-gray-900 leading-relaxed whitespace-pre-wrap'>
+Why:
+
+Removed h-5 (height: 1.25rem = 20px)
+h-5 was cutting off long messages!
+Now text can be any height needed
+
+
+5. Footer (Line 99)
+Before:
+javascriptreact<div className='border-t border-gray-800 p-4 bg-white'>
+After:
+javascriptreact<div className='border-t border-gray-800 p-4 bg-white flex-shrink-0'>
+Why:
+
+flex-shrink-0 = keeps footer at fixed height
+Prevents input area from shrinking
+Always stays at bottom
+
+
+6. Form Container (Line 100)
+Before:
+javascriptreact<form onSubmit={handlesubmit} className='max-w-3xl mx-auto'>
+After:
+javascriptreact<form onSubmit={handlesubmit} className='w-full md:max-w-[56%] mx-auto'>
+```
+
+**Why:**
+- Matches the message container width
+- `w-full` on mobile = no horizontal scroll
+- `md:max-w-[56%]` on desktop = consistent with messages area
+
+---
+
+## Visual Explanation:
+
+**Before (broken layout):**
+```
+┌─────────────────────┐
+│ Header (shrinks?)   │
+├─────────────────────┤
+│ Messages            │
+│ Messages            │ ← Can't scroll, overlaps!
+│ Messages overflow   │
+│ Messages overflow   │
+├─────────────────────┤
+│ Input (shrinks?)    │ ← Might get pushed off screen
+└─────────────────────┘
+```
+
+**After (fixed layout):**
+```
+┌─────────────────────┐
+│ Header (fixed)      │ ← flex-shrink-0
+├─────────────────────┤
+│ Messages  ↕         │
+│ [scrollable]        │ ← flex-1 + overflow-y-auto
+│ Messages            │
+├─────────────────────┤
+│ Input (fixed)       │ ← flex-shrink-0
+└─────────────────────┘
+
+Key Concepts:
+h-screen vs min-h-screen:
+
+h-screen = exactly 100vh (no overflow)
+min-h-screen = at least 100vh (can grow)
+
+flex-shrink-0:
+
+Prevents element from shrinking in flex container
+Keeps header/footer at fixed size
+
+flex-1:
+
+Takes all remaining space
+Enables middle section to scroll
+
+Responsive width:
+
+w-full = 100% on mobile
+md:max-w-[70%] = 70% on desktop (768px+)
+*/

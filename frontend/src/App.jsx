@@ -52,13 +52,13 @@ function App() {
   }
 
   return (
-    <div className='min-h-screen bg-white flex flex-col max-h-[70%] mx-auto ax-w-[70%] md:max-w-[70%] max-w-full mx-auto' style={{fontFamily: 'Styrene B, sans-serif'}} >
+    <div className='h-screen bg-white flex flex-col w-full md:max-w-[70%] mx-auto' style={{fontFamily: 'Styrene B, sans-serif'}}>
       
-      <div className='border-b border-black p-4'>
+      <div className='border-b border-black p-4 flex-shrink-0'>
         <h1 className='text-center text-2xl font-bold tracking-wide'>AI Chat</h1>
       </div>
 
-      <div className='flex-1 overflow-y-auto p-4 max-w-3xl w-full mx-auto'>
+      <div className='flex-1 overflow-y-auto p-4 w-full md:max-w-[56%] mx-auto'>
         {messages.length === 0 ? ( //if there are no messages, show a placeholder
           <div className='flex items-center justify-center h-full'>
             <p className='text-gray-400 text-sm'>Start a conversation</p>
@@ -77,9 +77,9 @@ function App() {
               <div key={index} className='space-y-2'>
                 <p className='text-xs text-gray-500 uppercase tracking-wider'>
                   {msg.role === 'user' ? 'You' : 'Assistant'}
-                  {/*If msg.role is 'user', show You otherwise show Assistant” */}
+                  {/*If msg.role is 'user', show You otherwise show Assistant" */}
                 </p>
-                <p className='text-gray-900 leading-relaxed whitespace-pre-wrap h-5'>
+                <p className='text-gray-900 leading-relaxed whitespace-pre-wrap'>
                   {msg.content}
                 </p>
               </div>
@@ -98,8 +98,8 @@ function App() {
         )}
       </div>
 
-      <div className='border-t border-gray-800 p-4 bg-white'>
-        <form onSubmit={handlesubmit} className='max-w-3xl mx-auto'>
+      <div className='border-t border-gray-800 p-4 bg-white flex-shrink-0'>
+        <form onSubmit={handlesubmit} className='w-full md:max-w-[56%] mx-auto'>
           <div className='flex gap-3'>
             <input
               type='text'

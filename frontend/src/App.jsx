@@ -52,7 +52,7 @@ function App() {
   }
 
   return (
-    <div className='min-h-screen bg-white flex flex-col' >
+    <div className='min-h-screen bg-white flex flex-col max-w-[70%] mx-auto' >
       
       <div className='border-b border-black p-4'>
         <h1 className='text-center text-2xl font-bold tracking-wide'>AI Chat</h1>

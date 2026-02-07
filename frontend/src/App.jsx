@@ -116,7 +116,18 @@ function App() {
                               await axios.post(...)      // Waiting for AI response...
                               setLoading(false)          // Button becomes enabled again */
 
-              disabled={loading || !text.trim()} //lloadding state turns true when we send a message and turns false when we get a response from the server. So, while waiting for the response, the button is disabled to prevent multiple submissions. Additionally, the button is also disabled if the input field is empty or contains only whitespace.
+              disabled={loading || !text.trim()} //loadding state turns true when we send a message and turns false when we get a response from the server. So, while waiting for the response, the button is disabled to prevent multiple submissions. Additionally, the button is also disabled if the input field is empty or contains only whitespace.
+              //button is disabled when loading is true & text is empty or contains only whitespace. This prevents users from sending multiple messages while waiting for a response and also prevents sending empty messages.
+              /* 
+              text = "     "
+              text.trim() = ""
+              !"" = true // empty → disable button
+
+              text = "hello"
+              text.trim() = "hello"
+              !"hello" = false  // has text → enable button
+
+              */
               className='px-6 py-3 bg-black text-white hover:bg-gray-800 disabled:bg-gray-500 disabled:cursor-not-allowed transition-colors'
             >
               {loading ? '...' : 'Send'}

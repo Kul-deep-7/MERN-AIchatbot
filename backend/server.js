@@ -1,28 +1,37 @@
 import dotenv from 'dotenv'
 dotenv.config()
-import { CohereClient } from 'cohere-ai'
+import { CohereClientV2 } from 'cohere-ai'
 import app from './app.js'
 
-const cohere = new CohereClient({
+const cohere = new CohereClientV2({
     token: process.env.API_KEY
 })
 
 app.post('/chat', async(req,res)=>{
     try {
-        const {message} = req.body;
+        const {text} = req.body;
         const response = await cohere.chat({
             model: 'command-a-03-2025',
-            messages:message
+            messages: [
+                {
+                role: 'user',
+                content: text,
+                }
+            ]
 
         })
         return res.json(
             {
                 reply: response.message.content[0].text,
-                messages: [...message, response.message]
             }
         )
     } catch (error) {
-        
+                console.error('Error:', error)
+                return res.status(500).json({ 
+                    error: 'Failed to get response',
+                    details: error.message 
+        })
+
     }
 })
 

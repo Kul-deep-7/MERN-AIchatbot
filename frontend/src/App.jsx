@@ -52,7 +52,7 @@ function App() {
   }
 
   return (
-    <div className='min-h-screen bg-white flex flex-col' >
+    <div className='min-h-screen bg-white flex flex-col max-h-[70%] mx-auto' >
       
       <div className='border-b border-black p-4'>
         <h1 className='text-center text-2xl font-bold tracking-wide'>AI Chat</h1>
@@ -79,7 +79,7 @@ function App() {
                   {msg.role === 'user' ? 'You' : 'Assistant'}
                   {/*If msg.role is 'user', show You otherwise show Assistant” */}
                 </p>
-                <p className='text-gray-900 leading-relaxed whitespace-pre-wrap'>
+                <p className='text-gray-900 leading-relaxed whitespace-pre-wrap h-5'>
                   {msg.content}
                 </p>
               </div>

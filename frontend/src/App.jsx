@@ -52,7 +52,7 @@ function App() {
   }
 
   return (
-    <div className='min-h-screen bg-white flex flex-col max-h-[70%] mx-auto' >
+    <div className='min-h-screen bg-white flex flex-col max-h-[70%] mx-auto ax-w-[70%] md:max-w-[70%] max-w-full mx-auto' style={{fontFamily: 'Styrene B, sans-serif'}} >
       
       <div className='border-b border-black p-4'>
         <h1 className='text-center text-2xl font-bold tracking-wide'>AI Chat</h1>

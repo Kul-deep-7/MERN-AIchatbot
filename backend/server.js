@@ -1,13 +1,18 @@
 import dotenv from 'dotenv'
 dotenv.config()
-import express from 'express'
+import { CohereClient } from 'cohere-ai'
+import app from './app.js'
 
-let app = express()
+const cohere = new CohereClient({
+    token: process.env.API_KEY
+})
+
+
 
 app.get('/',(req,res)=>{
     res.send('Hello World')
 })
 
-app.listen(3000,()=>{
-    console.log('Server is running on port 3000')
+app.listen(process.env.PORT,()=>{
+    console.log(`Server is running on port ${process.env.PORT}`)
 })

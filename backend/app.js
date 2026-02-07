@@ -5,7 +5,7 @@ let app = express();
 
 app.use(cors({
     origin: ['http://localhost:5173', 
-        'https://mern-aichatbot.onrender.com']
+        ]
     
 }
 ))

@@ -6,6 +6,8 @@ function App() {
   const [text, setText] = useState('')
   const [messages, setMessages] = useState([])
   const [loading, setLoading] = useState(false)
+  
+  const API = import.meta.env.VITE_API_URL;
 
   const handlesubmit = async(e) => {
     e.preventDefault();
@@ -28,7 +30,7 @@ function App() {
     setText('') 
 
     try {
-      let response = await axios.post('http://localhost:5000/chat', 
+      let response = await axios.post(`${API}/chat`, 
         { text: text },
         { 
           headers: {
